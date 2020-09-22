@@ -50,9 +50,8 @@ def copy_objs():
         llvm_enabled = True if 'CONFIG_LLVM=y' in cfg.read() else False
 
     # For each arch, copy library, plugins, plog_pb2.py and llvm-helpers
-    #for arch in ['arm', 'i386', 'x86_64', 'ppc', 'mips', 'mipsel']:
-    # XXX dropping mips and ppc to fit into pypi
-    for arch in ['arm', 'i386', 'x86_64', 'mipsel']:
+    #for arch in ['arm', 'i386', 'x86_64', 'mipsel']: # XXX: For pypi publish reduced set of architectures
+    for arch in ['arm', 'i386', 'x86_64', 'ppc', 'mips', 'mipsel']:
         libname = "libpanda-"+arch+".so"
         softmmu = arch+"-softmmu"
         path      = os.path.join(*[build_root, softmmu, libname])
@@ -127,6 +126,7 @@ class custom_install(install_orig):
         super().run()
 
 # To build a package for pip:
+# Toggle commented code above to build fewer architectures (for arch in ...)
 # python setup.py install
 # python setup.py sdist
 
